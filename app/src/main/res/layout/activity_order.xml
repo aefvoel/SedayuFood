@@ -10,152 +10,234 @@
             type="id.toriqwah.project.view.main.MainViewModel" />
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <include layout="@layout/toolbar" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/view_parent"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".view.main.MainActivity">
+            android:layout_below="@id/toolbar"
+            android:layout_above="@id/total_price">
 
-            <TextView
-                android:id="@+id/search"
+            <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/view_parent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/space_x1"
-                android:layout_margin="@dimen/space_x2"
-                android:text="Order Summary"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                tools:context=".view.main.MainActivity">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_order"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/space_x2"
-                android:layout_marginEnd="@dimen/space_x2"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/search">
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_order"
+                <TextView
+                    android:id="@+id/search"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/space_x2"
+                    android:padding="@dimen/space_x1"
+                    android:text="Order Summary"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                    tools:itemCount="3"
-                    tools:listitem="@layout/item_order" />
-            </androidx.cardview.widget.CardView>
-
-            <TextView
-                android:id="@+id/txt_payment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/space_x1"
-                android:layout_margin="@dimen/space_x2"
-                android:text="Payment Method"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/card_order" />
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_payment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/space_x2"
-                android:layout_marginEnd="@dimen/space_x2"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txt_payment">
-                <RadioGroup
-                    android:id="@+id/payment_method"
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_order"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/space_x1">
-                    <RadioButton
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Cash"/>
-                    <RadioButton
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="OVO"/>
-                    <RadioButton
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="GOPAY"/>
-                    <RadioButton
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Credit Card"/>
-                </RadioGroup>
-            </androidx.cardview.widget.CardView>
+                    app:cardCornerRadius="@dimen/space_x1"
+                    app:cardUseCompatPadding="true"
+                    android:layout_marginStart="@dimen/space_x2"
+                    android:layout_marginEnd="@dimen/space_x2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/search">
 
-            <TextView
-                android:id="@+id/txt_delivery"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/space_x1"
-                android:layout_margin="@dimen/space_x2"
-                android:text="Order Type"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/card_payment" />
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_type"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/space_x2"
-                android:layout_marginEnd="@dimen/space_x2"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txt_delivery">
-                <RadioGroup
-                    android:id="@+id/order_type"
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_order"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        tools:itemCount="3"
+                        tools:listitem="@layout/item_order" />
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/txt_payment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/space_x1">
-                    <RadioButton
+                    android:layout_margin="@dimen/space_x2"
+                    android:padding="@dimen/space_x1"
+                    android:text="Payment Method"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/card_order" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_payment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="@dimen/space_x1"
+                    app:cardUseCompatPadding="true"
+                    android:layout_marginStart="@dimen/space_x2"
+                    android:layout_marginEnd="@dimen/space_x2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/txt_payment">
+
+                    <RadioGroup
+                        android:id="@+id/payment_method"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Dine In"/>
-                    <RadioButton
+                        android:padding="@dimen/space_x1">
+
+                        <RadioButton
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Cash" />
+
+                        <RadioButton
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="OVO" />
+
+                        <RadioButton
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="GOPAY" />
+
+                        <RadioButton
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Credit Card" />
+                    </RadioGroup>
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/txt_delivery"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/space_x2"
+                    android:padding="@dimen/space_x1"
+                    android:text="Order Type"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/card_payment" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="@dimen/space_x1"
+                    app:cardUseCompatPadding="true"
+                    android:layout_marginStart="@dimen/space_x2"
+                    android:layout_marginEnd="@dimen/space_x2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/txt_delivery">
+
+                    <RadioGroup
+                        android:id="@+id/order_type"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Park Dine"/>
-                </RadioGroup>
-            </androidx.cardview.widget.CardView>
+                        android:padding="@dimen/space_x1">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Total"
-                android:textStyle="bold"
-                android:textSize="@dimen/space_x2_half"
-                android:padding="@dimen/space_x2"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/btn_proceed"/>
-            <TextView
-                android:id="@+id/total_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="50000"
-                android:textStyle="bold"
-                android:textSize="@dimen/space_x2_half"
-                android:padding="@dimen/space_x2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/btn_proceed"/>
-            <Button
-                android:id="@+id/btn_proceed"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:textAllCaps="false"
-                android:text="Proceed"
-                android:background="@color/colorBlue"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                        <RadioButton
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Dine In" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </LinearLayout>
+                        <RadioButton
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Park Dine" />
+                    </RadioGroup>
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/txt_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/space_x2"
+                    android:padding="@dimen/space_x1"
+                    android:text="Your Location"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/card_type" />
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="@dimen/space_x1"
+                    app:cardUseCompatPadding="true"
+                    android:layout_marginStart="@dimen/space_x2"
+                    android:layout_marginEnd="@dimen/space_x2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/txt_location">
+
+                    <EditText
+                        android:id="@+id/location"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:imeOptions="actionDone"
+                        android:background="@color/white"
+                        android:padding="@dimen/space_x1"/>
+                </androidx.cardview.widget.CardView>
+                <TextView
+                    android:id="@+id/txt_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/space_x2"
+                    android:padding="@dimen/space_x1"
+                    android:text="Your Number"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/card_location" />
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_number"
+                    app:cardCornerRadius="@dimen/space_x1"
+                    app:cardUseCompatPadding="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_x2"
+                    android:layout_marginEnd="@dimen/space_x2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/txt_number">
+
+                    <EditText
+                        android:id="@+id/number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:imeOptions="actionDone"
+                        android:background="@color/white"
+                        android:padding="@dimen/space_x1"/>
+                </androidx.cardview.widget.CardView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/space_x2"
+            android:layout_above="@id/btn_proceed"
+            android:text="Total"
+            android:textSize="@dimen/space_x2_half"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/total_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/space_x2"
+            android:layout_alignParentEnd="true"
+            android:layout_above="@id/btn_proceed"
+            android:text="50000"
+            android:textSize="@dimen/space_x2_half"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btn_proceed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorBlue"
+            android:onClick="@{()->vm.onClickProceed()}"
+            android:text="Proceed"
+            android:layout_alignParentBottom="true"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+    </RelativeLayout>
 </layout>

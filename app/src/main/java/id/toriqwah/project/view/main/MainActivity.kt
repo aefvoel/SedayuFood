@@ -68,8 +68,9 @@ class MainActivity : BaseActivity(), TenantAdapter.Listener {
         }
     }
 
-    override fun onItemClicked(data: ArrayList<Menu>) {
+    override fun onItemClicked(id: Long, data: ArrayList<Menu>) {
         AppPreference.putMenu(data)
+        AppPreference.putIdTenant(id)
         Log.d("menu", data.toString())
         val intent = Intent(this, MenuActivity::class.java)
         startActivity(intent)

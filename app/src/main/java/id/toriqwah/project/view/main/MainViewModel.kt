@@ -8,6 +8,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import id.toriqwah.project.model.Menu
+import id.toriqwah.project.model.Order
 import id.toriqwah.project.model.Tenant
 import id.toriqwah.project.util.SingleLiveEvent
 import id.toriqwah.project.view.base.BaseViewModel
@@ -21,15 +22,20 @@ class MainViewModel : BaseViewModel(){
 
     private val database = FirebaseDatabase.getInstance()
     val username = MutableLiveData<String>()
-    val password = MutableLiveData<String>()
-    val loginSuccess = SingleLiveEvent<Unit>()
+    val orderId = MutableLiveData<Long>()
+    val orderSuccess = SingleLiveEvent<Unit>()
 
     val listTenant = MutableLiveData<ArrayList<Tenant>>()
     val listMenu = MutableLiveData<ArrayList<Menu>>()
     val clickOrder = SingleLiveEvent<Unit>()
+    val clickProceed = SingleLiveEvent<Unit>()
+
 
     fun onClickOrder(){
         clickOrder.call()
+    }
+    fun onClickProceed(){
+        clickProceed.call()
     }
 
     fun getDataTenant(child: String) {
@@ -57,20 +63,40 @@ class MainViewModel : BaseViewModel(){
         }
     }
 
-    fun getDataMenu(child: String) {
-        val tenantListener = object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                for (tenant in dataSnapshot.children){
-                    tenant.getValue(Tenant::class.java)?.let { listTenant.value?.add(it) }
+    fun pushOrder(order: Order){
+        isLoading.value = true
+        viewModelScope.launch {
+            val key = database.reference.child("order").push().key
+            if (key != null) {
+                database.reference.child("order").child(key).setValue(order)
+                    .addOnSuccessListener {
+                        isLoading.value = false
+                        orderSuccess.call()
+                    }
+                    .addOnFailureListener {
+                        isLoading.value = false
+                    }
+            }
+        }
+    }
+
+    fun getDataOrder(child: String) {
+        viewModelScope.launch {
+            val orderListener = object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    for (order in dataSnapshot.children){
+                        orderId.value = order.child("id").value as Long?
+                    }
+
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
                 }
 
             }
-
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-
+            database.reference.child(child).orderByKey().limitToLast(1).addListenerForSingleValueEvent(orderListener)
         }
-        database.reference.child(child).addListenerForSingleValueEvent(tenantListener)
+
     }
 }

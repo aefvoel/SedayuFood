@@ -14,6 +14,7 @@ class AppPreference {
         private const val a_token = "a_token"
         private const val a_list_menu = "a_list_menu"
         private const val a_list_order = "a_list_order"
+        private const val a_id_tenant = "a_id_tenant"
 
 
         fun deleteAll() {
@@ -22,6 +23,7 @@ class AppPreference {
             Hawk.delete(a_token)
             Hawk.delete(a_list_menu)
             Hawk.delete(a_list_order)
+            Hawk.delete(a_id_tenant)
 
         }
 
@@ -63,6 +65,13 @@ class AppPreference {
         fun getListOrder(): ArrayList<List> {
             val type = object : TypeToken<ArrayList<List>>() {}.type
             return Gson().fromJson(Hawk.get(a_list_order, ""), type)
+        }
+        fun putIdTenant(value: Long) {
+            Hawk.put(a_id_tenant, value)
+        }
+
+        fun getIdTenant(): Long {
+            return (Hawk.get(a_id_tenant, 0))
         }
     }
 

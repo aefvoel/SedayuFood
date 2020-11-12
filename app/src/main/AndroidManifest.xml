@@ -12,6 +12,7 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
+
         android:theme="@style/AppTheme.TranslucentStatusBar">
         <activity android:name=".view.splashscreen.SplashScreenActivity">
             <intent-filter>
@@ -22,7 +23,9 @@
         </activity>
         <activity android:name=".view.main.MainActivity"/>
         <activity android:name=".view.main.MenuActivity"/>
-        <activity android:name=".view.main.OrderActivity"/>
+        <activity
+            android:name=".view.main.OrderActivity"
+            android:windowSoftInputMode="adjustPan|adjustResize"/>
 
     </application>
 

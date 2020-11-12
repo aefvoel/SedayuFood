@@ -19,7 +19,7 @@ class TenantAdapter(context : Context, list: ArrayList<Tenant>, private val list
     private val itemList = list
 
     interface Listener{
-        fun onItemClicked(data: ArrayList<Menu>)
+        fun onItemClicked(id: Long, data: ArrayList<Menu>)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TenantViewHolder {
@@ -37,7 +37,7 @@ class TenantAdapter(context : Context, list: ArrayList<Tenant>, private val list
         holder.title.text = itemList[position].name
         holder.desc.text = itemList[position].desc
         holder.itemView.setOnClickListener {
-            listener.onItemClicked(itemList[position].menu!!)
+            listener.onItemClicked(itemList[position].id!!, itemList[position].menu!!)
         }
     }
 
