@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">SedayuFood</string>
+    <string name="error_network">Connection Problem</string>
+
+</resources>
