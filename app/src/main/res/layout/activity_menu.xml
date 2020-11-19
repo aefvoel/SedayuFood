@@ -44,7 +44,6 @@
 
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/search"
-                app:layout_constraintBottom_toTopOf="@id/btn_basket"
                 tools:itemCount="2"
                 tools:listitem="@layout/item_menu" />
             <Button

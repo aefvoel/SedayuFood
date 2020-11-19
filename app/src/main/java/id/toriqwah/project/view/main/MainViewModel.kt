@@ -68,6 +68,7 @@ class MainViewModel : BaseViewModel(){
         viewModelScope.launch {
             val key = database.reference.child("order").push().key
             if (key != null) {
+                order.uid = key
                 database.reference.child("order").child(key).setValue(order)
                     .addOnSuccessListener {
                         isLoading.value = false

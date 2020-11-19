@@ -3,6 +3,8 @@ package id.toriqwah.project.model
 import com.google.gson.annotations.SerializedName
 
 data class Order (
+    @SerializedName("uid")
+    var uid: String = "",
     @SerializedName("id")
     var id: Long? = null,
     @SerializedName("id_tenant")
