@@ -111,13 +111,17 @@ class OrderActivity : BaseActivity() {
 
     private fun openWhatsApp(){
         try {
-            val text = "This is a test\nThis is a test"
+            var text = "Saya mau order:%0a"
+            for (list in listMenu){
+                text = text + list.quantity + "x " + list.name + " Rp." + list.price + "%0a"
+            }
+            text = text + "Lokasi:%0a" + order.location + "%0a" + "Metode Pembayaran:%0a" + order.payment_method + "Total:%0aRp." + order.total_price
 
             val toNumber = "6282230612512"
 
 
             val intent = Intent(Intent.ACTION_VIEW)
-            intent.data = Uri.parse("http://api.whatsapp.com/send?phone=$toNumber&text=$text")
+            intent.data = Uri.parse("http://api.whatsapp.com/send?phone=$toNumber&text=${text.replace(" ", "%20")}")
             startActivity(intent)
         }
         catch (e: Exception){
