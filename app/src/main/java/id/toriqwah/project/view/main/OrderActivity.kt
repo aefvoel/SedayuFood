@@ -115,7 +115,7 @@ class OrderActivity : BaseActivity() {
             for (list in listMenu){
                 text = text + list.quantity + "x " + list.name + " Rp." + list.price + "%0a"
             }
-            text = text + "Lokasi:%0a" + order.location + "%0a" + "Metode Pembayaran:%0a" + order.payment_method + "Total:%0aRp." + order.total_price
+            text = text + "Lokasi:%0a" + order.location + "%0a" + "Metode Pembayaran:%0a" + order.payment_method + "%0aTotal:%0aRp." + order.total_price
 
             val toNumber = "6282230612512"
 
